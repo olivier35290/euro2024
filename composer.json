@@ -1,0 +1,22 @@
+{
+    "name": "oliviercharlet/euro2024_2",
+    "description": "Euro 2024 Predictions Project",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Olivier Charlet",
+            "email": "olivier.charlet@neuf.fr"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "vlucas/phpdotenv": "^5.6"
+    },
+
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    }
+}    
