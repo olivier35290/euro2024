@@ -1,0 +1,44 @@
+<!-- Section de la colonne de gauche -->
+<section class="left-column">
+    <!-- Titre principal de la section -->
+    <h2>Pronos entre amis, familles ou collègues pour l'EURO 2024</h2>
+    <!-- Texte d'introduction -->
+    <p class="intro-text">Rejoignez notre plateforme de pronostics pour vivre une expérience unique pendant l'EURO 2024.<br>
+    Que vous soyez avec des amis, de la famille ou des collègues, faites vos pronostics et voyez qui est le meilleur !</p>
+    
+    <!-- Étape 1: Inscription et connexion -->
+    <h3>Étape 1 : Inscrivez-vous et connectez-vous</h3>
+    <!-- Description de l'étape 1 -->
+    <p>Pour commencer, créez un compte en vous inscrivant sur notre site.<br>
+    Une fois inscrit, connectez-vous avec vos identifiants pour accéder à votre espace personnel.</p>
+    
+    <!-- Étape 2: Validation des pronostics -->
+    <h3>Étape 2 : Validez vos pronos jusqu'à 1 heure avant de début du match</h3>
+    <!-- Description de l'étape 2 -->
+    <p>Accédez à la page des pronostics et choisissez les matchs pour lesquels vous souhaitez faire des pronostics.
+    <br>Sélectionnez le résultat que vous pensez être correct et soumettez votre pronostic.<br>
+    Vous pouvez suivre l'évolution de vos pronostics en temps réel.</p>
+    <p>1 point par résultats trouvés</p>
+    
+    <!-- Étape 3: Amusement -->
+    <h3>Étape 3 : Amusez-vous</h3>
+    <!-- Description de l'étape 3 -->
+    <p>Partagez vos résultats avec vos amis, familles ou collègues. Comparez vos scores et voyez qui est le meilleur pronostiqueur !<br>
+    Profitez de l'EURO 2024 en ajoutant une touche de compétition amicale.</p>
+</section>
+
+<!-- PHP pour sélectionner une mascotte aléatoire -->
+<?php
+$mascots = ['assets/img/mascotte1.jpg', 'assets/img/mascotte2.jpg'];
+$selectedMascot = $mascots[array_rand($mascots)];
+?>
+<!-- Affichage de l'image de la mascotte sélectionnée -->
+<img src="<?= $selectedMascot ?>" alt="Mascotte" class="mascotte">
+
+<!-- Section de la colonne de droite -->
+<section class="right-column">
+    <!-- Titre de la section des actions -->
+    <h2>Actions</h2>
+    <!-- Liens pour se connecter ou s'inscrire -->
+    <p><a href="index.php?route=login">Se connecter</a> ou <a href="index.php?route=register">S'inscrire</a></p>
+</section>

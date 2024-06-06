@@ -1,0 +1,26 @@
+<section>
+    <!-- Formulaire de connexion -->
+    <form method="POST" action="index.php?route=login" class="login-form">
+        <!-- Groupe de champs pour l'email -->
+        <div class="form-group">
+            <!-- Étiquette pour le champ email -->
+            <label for="email">Email</label>
+            <!-- Champ de saisie pour l'email -->
+            <input type="email" id="email" name="email" required>
+        </div>
+        <!-- Groupe de champs pour le mot de passe -->
+        <div class="form-group">
+            <!-- Étiquette pour le champ mot de passe -->
+            <label for="password">Mot de passe</label>
+            <!-- Champ de saisie pour le mot de passe -->
+            <input type="password" id="password" name="password" required>
+        </div>
+        <!-- Groupe de champs pour le bouton de soumission -->
+        <div class="form-group">
+            <!-- Bouton de soumission du formulaire -->
+            <button type="submit">Se connecter</button>
+        </div>
+    </form>
+    <!-- Affichage du message d'erreur s'il existe -->
+    <?php if (isset($error)) echo "<p>$error</p>"; ?>
+</section>

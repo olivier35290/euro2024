@@ -1,0 +1,42 @@
+<!-- Titre principal du site -->
+<h1>La Team Pronostics</h1>
+
+<!-- Navigation principale du site avec l'identifiant "nav" -->
+<nav id="nav">
+    <!-- Bouton du menu burger pour les petits écrans -->
+    <button class="burger-menu" id="burger-menu">
+        ☰ <!-- Icône du menu burger (trois lignes) -->
+    </button>
+    
+    <!-- Liste des liens de navigation -->
+    <ul>
+        <!-- Lien vers la page d'accueil -->
+        <li><a class="bigger" href="index.php">Accueil</a></li>
+        
+        <!-- Lien vers la page pour faire un pronostic -->
+        <li><a class="bigger" href="index.php?route=predictions">Faire un pronostic</a></li>
+        
+        <!-- Lien vers la page du classement -->
+        <li><a class="bigger" href="index.php?route=leaderboard">Classement</a></li>
+        
+        <!-- Vérifie si l'utilisateur est connecté -->
+        <?php if (isset($_SESSION['user'])): ?>
+            <!-- Vérifie si l'utilisateur est l'administrateur (utilisateur avec l'ID 1) -->
+            <?php if ($_SESSION['user'] == 1): // Seul l'utilisateur avec l'ID 1 est l'administrateur ?>
+                <!-- Lien vers la page d'administration -->
+                <li><a class="bigger" href="index.php?route=admin">Admin</a></li>
+            <?php endif; ?>
+            
+            <!-- Lien pour se déconnecter -->
+            <li><a class="bigger" href="index.php?route=logout">Déconnexion</a></li>
+        
+        <!-- Si l'utilisateur n'est pas connecté -->
+        <?php else: ?>
+            <!-- Lien vers la page de connexion -->
+            <li><a class="bigger" href="index.php?route=login">Connexion</a></li>
+            
+            <!-- Lien vers la page d'inscription -->
+            <li><a class="bigger" href="index.php?route=register">Inscription</a></li>
+        <?php endif; ?>
+    </ul>
+</nav>

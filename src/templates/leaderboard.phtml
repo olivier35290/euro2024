@@ -1,0 +1,28 @@
+<section>
+    <!-- Titre de la section -->
+    <h2>Classement</h2>
+    <!-- Tableau pour afficher le classement des utilisateurs -->
+    <table>
+        <!-- En-tête du tableau -->
+        <thead>
+            <tr>
+                <!-- Colonne pour le login des utilisateurs -->
+                <th>Login</th>
+                <!-- Colonne pour le score des utilisateurs -->
+                <th>Score</th>
+            </tr>
+        </thead>
+        <!-- Corps du tableau -->
+        <tbody>
+            <!-- Boucle PHP pour parcourir les utilisateurs et afficher leurs informations -->
+            <?php foreach ($users as $user): ?>
+                <tr>
+                    <!-- Cellule affichant le nom d'utilisateur, avec échappement pour éviter les attaques XSS -->
+                    <td><?= htmlspecialchars($user['username']) ?></td>
+                    <!-- Cellule affichant le score de l'utilisateur, avec échappement pour éviter les attaques XSS -->
+                    <td><?= htmlspecialchars($user['score']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
+</section>

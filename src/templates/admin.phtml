@@ -1,0 +1,116 @@
+<!-- Section principale du panel administrateur -->
+<section>
+    <!-- Titre de la section -->
+    <h2>Panel Admin</h2>
+
+    <!-- Affichage des erreurs si elles existent -->
+    <?php if (isset($error)): ?>
+        <!-- Paragraphe rouge affichant le message d'erreur -->
+        <p style="color: red;"><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
+
+    <!-- Affichage des messages de succès si ils existent -->
+    <?php if (isset($_SESSION['success_message'])): ?>
+        <!-- Paragraphe vert affichant le message de succès -->
+        <p style="color: green;"><?= htmlspecialchars($_SESSION['success_message']) ?></p>
+        <!-- Suppression du message de succès de la session après affichage -->
+        <?php unset($_SESSION['success_message']); ?>
+    <?php endif; ?>
+
+    <!-- Formulaire pour mettre à jour le résultat d'un match -->
+    <form method="POST" action="index.php?route=update-match-result">
+        <!-- Label et menu déroulant pour sélectionner un match -->
+        <label for="match_id">Match</label>
+        <select id="match_id" name="match_id">
+            <!-- Boucle pour afficher chaque match dans le menu déroulant -->
+            <?php foreach ($matches as $match): ?>
+                <option value="<?= $match['match_id'] ?>">
+                    <!-- Affichage des drapeaux et noms des équipes ainsi que la date du match -->
+                    <img src="<?= htmlspecialchars($match['team1_flag']) ?>" alt="<?= htmlspecialchars($match['team1_name']) ?> flag" width="20">
+                    <?= htmlspecialchars($match['team1_name']) ?> vs 
+                    <img src="<?= htmlspecialchars($match['team2_flag']) ?>" alt="<?= htmlspecialchars($match['team2_name']) ?> flag" width="20">
+                    <?= htmlspecialchars($match['team2_name']) ?> (<?= htmlspecialchars($match['match_date']) ?>)
+                </option>
+            <?php endforeach; ?>
+        </select>
+
+        <!-- Label et menu déroulant pour sélectionner le résultat du match -->
+        <label for="result">Résultat</label>
+        <select id="result" name="result" required>
+            <!-- Options pour les résultats possibles -->
+            <option value="1">Victoire de l'équipe 1</option>
+            <option value="N">Match nul</option>
+            <option value="2">Victoire de l'équipe 2</option>
+        </select>
+        <!-- Bouton pour soumettre le formulaire -->
+        <button type="submit">Valider</button>
+    </form>
+
+    <!-- Sous-titre pour la liste des matchs terminés -->
+    <h3>Matchs terminés</h3>
+    <!-- Conteneur de la table pour les matchs terminés -->
+    <div class="table-container">
+        <!-- Tableau des matchs terminés -->
+        <table>
+            <!-- En-tête du tableau -->
+            <thead>
+                <tr>
+                    <th>Match</th>
+                    <th>Date et Heure</th>
+                    <th>Résultat</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <!-- Corps du tableau -->
+            <tbody>
+                <!-- Boucle pour afficher chaque match terminé -->
+                <?php foreach ($matches as $match): ?>
+                    <?php if ($match['result']): ?>
+                        <!-- Ligne du tableau pour chaque match terminé -->
+                        <tr id="match-<?= $match['match_id'] ?>">
+                            <td>
+                                <!-- Affichage des drapeaux et noms des équipes -->
+                                <img src="<?= htmlspecialchars($match['team1_flag']) ?>" alt="<?= htmlspecialchars($match['team1_name']) ?> flag" width="20">
+                                <?= htmlspecialchars($match['team1_name']) ?> vs 
+                                <img src="<?= htmlspecialchars($match['team2_flag']) ?>" alt="<?= htmlspecialchars($match['team2_name']) ?> flag" width="20">
+                                <?= htmlspecialchars($match['team2_name']) ?>
+                            </td>
+                            <!-- Affichage de la date et heure du match -->
+                            <td><?= htmlspecialchars($match['match_date']) ?></td>
+                            <!-- Affichage du résultat du match -->
+                            <td><?= htmlspecialchars($match['result']) ?></td>
+                            <!-- Bouton pour supprimer le match -->
+                            <td><button class="delete-match-btn" data-match-id="<?= $match['match_id'] ?>">Supprimer</button></td>
+                        </tr>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Sous-titre pour le classement des utilisateurs -->
+    <h3>Classement des utilisateurs</h3>
+    <!-- Conteneur de la table pour le classement -->
+    <div class="table-container">
+        <!-- Tableau du classement des utilisateurs -->
+        <table id="leaderboard">
+            <!-- En-tête du tableau -->
+            <thead>
+                <tr>
+                    <th>Utilisateur</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <!-- Corps du tableau -->
+            <tbody>
+                <!-- Boucle pour afficher chaque utilisateur et son score -->
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($user['username']) ?></td>
+                        <td><?= htmlspecialchars($user['score']) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</section>

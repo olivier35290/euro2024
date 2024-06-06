@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Déclaration du jeu de caractères utilisé par le document -->
+    <meta charset="UTF-8">
+    <!-- Définition de la zone d'affichage pour rendre la page responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Description du contenu de la page pour les moteurs de recherche -->
+    <meta name="description" content="Rejoignez La Team Pronostics pour l'EURO 2024 et faites vos pronostics entre amis, famille ou collègues. Inscrivez-vous, connectez-vous et amusez-vous avec des pronostics sportifs compétitifs.">
+    <!-- Titre de la page affiché dans l'onglet du navigateur -->
+    <title>Euro 2024 Predictions</title>
+    <!-- Lien vers le fichier CSS pour le style de la page -->
+    <link rel="stylesheet" href="assets/styles/css/styles.css">
+    <!-- Favicon de la page -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body data-registration-success="<?= isset($_SESSION['registration_success']) ? 'true' : 'false' ?>" data-prediction-success="<?= isset($_SESSION['prediction_success']) ? 'true' : 'false' ?>">
+    <!-- En-tête de la page -->
+    <header>
+        <!-- Inclusion de l'en-tête depuis un fichier partiel -->
+        <?php require __DIR__ . '/partials/_header.phtml'; ?>
+    </header>
+    <!-- Contenu principal de la page -->
+    <main class="column">
+        <!-- Inclusion du template dynamique en fonction de la route actuelle -->
+        <?php require __DIR__ . '/' . $template . '.phtml'; ?>
+    </main>
+    <!-- Affichage du pied de page sauf pour la route "legal" -->
+    <?php if ($current_route !== 'legal'): ?>
+        <footer>
+            <!-- Inclusion du pied de page depuis un fichier partiel -->
+            <?php require __DIR__ . '/partials/_footer.phtml'; ?>
+        </footer>
+    <?php endif; ?>
+
+    <!-- Modale de succès d'inscription -->
+    <div id="registrationSuccessModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Vous êtes bien inscrit ! Vous pouvez maintenant vous connecter.</p>
+        </div>
+    </div>
+    <!-- Inclusion du fichier JavaScript pour les fonctionnalités de l'admin -->
+    <script src="assets/js/admin.js"></script>
+
+    <!-- Modale de succès de pronostic -->
+    <div id="predictionSuccessModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Votre pronostic a bien été enregistré !</p>
+        </div>
+    </div>
+    <!-- Inclusion du fichier JavaScript pour les fonctionnalités générales -->
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
+
+<?php
+// Suppression des messages de succès dans la session après leur affichage
+if (isset($_SESSION['registration_success'])) unset($_SESSION['registration_success']);
+if (isset($_SESSION['prediction_success'])) unset($_SESSION['prediction_success']);
+?>

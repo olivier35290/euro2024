@@ -1,0 +1,82 @@
+<section>
+    <!-- Titre de la section -->
+    <h2>Faire un pronostic</h2>
+    <!-- Message de bienvenue avec le nom d'utilisateur -->
+    <p>Bienvenue, <?= htmlspecialchars($username) ?> !</p>
+    
+    <!-- Affichage des erreurs s'il y en a -->
+    <?php if (isset($error)): ?>
+        <p style="color: red;"><?= htmlspecialchars($error) ?></p>
+    <?php endif; ?>
+    
+    <!-- Affichage du message de succès si le pronostic a été enregistré -->
+    <?php if (isset($_SESSION['prediction_success'])): ?>
+        <p style="color: green;">Votre pronostic a bien été enregistré !</p>
+        <!-- Suppression du message de succès de la session -->
+        <?php unset($_SESSION['prediction_success']); ?>
+    <?php endif; ?>
+    
+    <!-- Formulaire pour soumettre un pronostic -->
+    <form method="POST" action="index.php?route=submit-prediction">
+        <!-- Sélecteur pour choisir le match -->
+        <label for="match_id">Match</label>
+        <select id="match_id" name="match_id">
+            <?php foreach ($matches as $match): ?>
+                <?php
+                    // Calculer l'intervalle entre la date et l'heure actuelles et la date du match
+                    $currentDateTime = new \DateTime();
+                    $matchDateTime = new \DateTime($match['match_date']);
+                    $interval = $currentDateTime->diff($matchDateTime);
+                    
+                    // Désactiver l'option si le match est déjà commencé ou commence dans moins d'une heure
+                    $disabled = ($interval->invert == 1 || $interval->h < 1 && $interval->d == 0 && $interval->m == 0) ? 'disabled' : '';
+                    
+                    // Sélectionner l'option si un pronostic existe pour ce match
+                    $selected = (isset($lastPredictions[$match['match_id']])) ? 'selected' : '';
+                ?>
+                <!-- Option pour chaque match -->
+                <option value="<?= $match['match_id'] ?>" <?= $disabled ?> <?= $selected ?>>
+                    <!-- Affichage des drapeaux et noms des équipes avec la date du match -->
+                    <img src="<?= htmlspecialchars($match['team1_flag']) ?>" alt="<?= htmlspecialchars($match['team1_name']) ?> flag" width="20">
+                    <?= htmlspecialchars($match['team1_name']) ?> vs 
+                    <img src="<?= htmlspecialchars($match['team2_flag']) ?>" alt="<?= htmlspecialchars($match['team2_name']) ?> flag" width="20">
+                    <?= htmlspecialchars($match['team2_name']) ?> (<?= htmlspecialchars($match['match_date']) ?>)
+                </option>
+            <?php endforeach; ?>
+        </select><br><br>
+        
+        <!-- Sélecteur pour choisir le résultat du match -->
+        <label for="prediction_result">Résultat</label>
+        <select id="prediction_result" name="prediction_result">
+            <option value="1">Victoire de l'équipe 1</option>
+            <option value="N">Match nul</option>
+            <option value="2">Victoire de l'équipe 2</option>
+        </select>
+        
+        <!-- Bouton pour soumettre le formulaire -->
+        <button type="submit">Soumettre</button>
+
+        <!-- Affichage des derniers pronostics de l'utilisateur -->
+        <?php if (isset($lastPredictions)): ?>
+            <h3>Vos derniers pronostics</h3>
+            <ul>
+                <?php foreach ($lastPredictions as $matchId => $result): ?>
+                    <?php
+                    // Rechercher le match correspondant à l'ID dans la liste des matchs
+                    $match = array_filter($matches, function ($m) use ($matchId) {
+                        return $m['match_id'] == $matchId;
+                    });
+                    $match = reset($match);
+                    ?>
+                    <!-- Affichage de chaque dernier pronostic -->
+                    <li>
+                        <img src="<?= htmlspecialchars($match['team1_flag']) ?>" alt="<?= htmlspecialchars($match['team1_name']) ?> flag" width="20">
+                        <?= htmlspecialchars($match['team1_name']) ?> vs 
+                        <img src="<?= htmlspecialchars($match['team2_flag']) ?>" alt="<?= htmlspecialchars($match['team2_name']) ?> flag" width="20">
+                        <?= htmlspecialchars($match['team2_name']) ?> - Résultat: <?= htmlspecialchars($result) ?>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php endif; ?>
+    </form>
+</section>

@@ -1,0 +1,309 @@
+/* Applique la propriété box-sizing pour inclure le padding et la bordure dans la largeur et la hauteur des éléments */
+* {
+    box-sizing: border-box; /* On spécifie que la largeur (width) de chaque boîte comprend le padding et la bordure (par défaut, c'est seulement la largeur du contenu) */
+}
+
+/* Définit la taille de la police de base pour le document HTML */
+html {
+    font-size: 62.5%; /* 1rem = 10px (la formule est 10/16*100) la taille par défaut étant 16px */
+}
+
+/* Style de base pour le corps du document */
+body {
+    font-size: 1.6rem; /* on remet la taille du texte par défaut pour le body à 16px en utilisant les rem comme unité */
+    font-family: Arial, sans-serif;
+    background-color: #EBE9EC;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style pour l'en-tête du document */
+header {
+    color: #3FC131;
+    padding: 1em 0;
+    text-align: center;
+    background-color: #fff;
+    border-bottom: 0.2rem solid #3FC131;
+    position: relative;
+}
+
+/* Style pour le titre dans l'en-tête */
+header h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+/* Style pour la navigation dans l'en-tête */
+header nav {
+    position: relative;
+}
+
+/* Style pour les listes dans la navigation */
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1em 0 0 0;
+    font-size: 2.4rem;
+}
+
+/* Style pour afficher les éléments de navigation lorsqu'ils sont actifs */
+header nav ul.active {
+    display: flex;
+}
+
+/* Style pour les éléments de la liste de navigation */
+header nav ul li {
+    margin: 0.5em 0;
+}
+
+/* Style pour les liens dans les éléments de navigation */
+header nav ul li a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+/* Style pour les liens lorsqu'ils sont survolés */
+header nav ul li a:hover {
+    color: #3FC131;
+}
+
+/* Style pour le menu burger */
+.burger-menu {
+    display: block;
+    font-size: 3rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    top: 1rem; 
+    right: 2rem; 
+    z-index: 1000; 
+}
+
+/* Style pour le texte d'introduction */
+.intro-text {
+    font-size: 2.4rem;
+    margin: 1em 0;
+    text-align: center;
+}
+
+/* Style pour la section principale du document */
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1em;
+    background-color: #fff;
+    border: 0.1rem solid #ddd;
+    margin: 1em auto;
+    max-width: 100%;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); 
+}
+
+/* Style pour les colonnes gauche et droite */
+.left-column, .right-column {
+    flex: 1;
+    padding: 1em;
+    margin: 0.5em;
+    background-color: #f9f9f9;
+    border-radius: 0.8rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.05);
+    width: 100%;
+}
+
+/* Style pour la colonne gauche */
+.left-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Style pour la colonne droite */
+.right-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Style pour les titres dans la colonne droite */
+.right-column h2 {
+    font-size: 2.4rem;
+    margin-bottom: 1em;
+}
+
+/* Style pour l'image de la mascotte */
+.mascotte {
+    width: 8rem;
+    margin-top: 1em;
+}
+
+/* Style pour le pied de page */
+footer {
+    color: #333;
+    text-align: center;
+    padding: 1em 0;
+    background-color: #fff;
+    border-top: 0.2rem solid #3FC131;
+    margin-top: 1em;
+}
+
+/* Style pour le conteneur de table */
+.table-container {
+    overflow-x: auto;
+}
+
+/* Style pour les tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+}
+
+/* Style pour les cellules des tables */
+th, td {
+    padding: 1em;
+    border: 0.1rem solid #ddd;
+    text-align: left;
+}
+
+/* Style pour les modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 6rem;
+}
+
+/* Style pour le contenu des modales */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 2em;
+    border: 0.1rem solid #888;
+    width: 80%;
+}
+
+/* Style pour le bouton de fermeture des modales */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 2.8rem;
+    font-weight: bold;
+}
+
+/* Style pour le bouton de fermeture lorsqu'il est survolé ou actif */
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Styles pour les formulaires */
+.login-form {
+    display: flex;
+    flex-direction: column;
+    width: 30rem;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    padding: 1rem;
+    font-size: 1.6rem;
+    border: 0.1rem solid #ccc;
+    border-radius: 0.5rem;
+}
+
+.form-group button {
+    padding: 1rem;
+    background-color: #3FC131;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.5rem;
+    font-size: 1.6rem;
+}
+
+.form-group button:hover {
+    background-color: #369e2e;
+}
+
+/* Styles spécifiques aux écrans de tablettes */
+@media (min-width: 78rem) {
+    header nav ul {
+        flex-direction: row;
+        display: flex;
+    }
+
+    .burger-menu {
+        display: none;
+    }
+
+    header nav ul li {
+        margin: 0 2em;
+    }
+
+    main {
+        max-width: 75rem;
+    }
+
+    .left-column, .right-column {
+        width: auto;
+    }
+
+    .mascotte {
+        width: 12rem;
+        margin-top: 1em;
+    }
+}
+
+/* Styles spécifiques aux écrans d'ordinateurs */
+@media (min-width: 120rem) {
+    main {
+        flex-direction: row;
+        max-width: 120rem;
+        margin-top: 2em;
+        margin-bottom: 1em;
+    }
+
+    .left-column, .right-column {
+        margin: 1em;
+    }
+
+    .mascotte {
+        width: 15rem;
+        margin-top: 1em;
+    }
+
+    footer {
+        padding: 2em;
+        margin-top: 1em;
+    }
+}
