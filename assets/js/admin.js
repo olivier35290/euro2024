@@ -1,36 +1,29 @@
-// Attendre que le contenu du document soit chargé
 document.addEventListener('DOMContentLoaded', function() {
-    
-    // Fonction pour attacher des écouteurs d'événements aux boutons de suppression de match
+    // Fonction pour attacher des écouteurs d'événements aux boutons de suppression
     function attachDeleteListeners() {
-        // Sélectionner tous les boutons avec la classe 'delete-match-btn' et ajouter un écouteur de clic
         document.querySelectorAll('.delete-match-btn').forEach(button => {
             button.addEventListener('click', function() {
-                // Récupérer l'ID du match à partir de l'attribut data-match-id du bouton
                 const matchId = this.dataset.matchId;
-                // Appeler la fonction deleteMatch avec l'ID du match
                 deleteMatch(matchId);
             });
         });
     }
 
-    // Appeler la fonction pour attacher les écouteurs d'événements de suppression
+    // Appel initial de la fonction pour attacher les écouteurs
     attachDeleteListeners();
 
     // Fonction pour supprimer un match
     function deleteMatch(matchId) {
-        // Demander confirmation à l'utilisateur avant de supprimer le match
         if (confirm('Êtes-vous sûr de vouloir supprimer ce match ?')) {
-            // Envoyer une requête fetch pour supprimer le match par son ID
             fetch(`index.php?route=delete-match&id=${matchId}`, {
                 method: 'GET',
             })
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Supprimer la ligne du tableau correspondant au match supprimé
+                    // Supprimer la ligne du tableau après suppression réussie
                     document.getElementById(`match-${matchId}`).remove();
-                    // Mettre à jour le classement des utilisateurs après la suppression réussie
+                    // Mettre à jour le classement après suppression réussie
                     updateLeaderboard(data.users);
                 } else {
                     alert('Erreur lors de la suppression du match.');
@@ -43,13 +36,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Fonction pour mettre à jour le classement des utilisateurs
+    // Fonction pour mettre à jour le tableau du classement
     function updateLeaderboard(users) {
         const leaderboard = document.getElementById('leaderboard');
         if (leaderboard) {
-            // Vider le contenu actuel du tableau de classement
             leaderboard.innerHTML = '';
-            // Pour chaque utilisateur, ajouter une nouvelle ligne au tableau de classement
             users.forEach(user => {
                 const row = document.createElement('tr');
                 row.innerHTML = `<td>${user.username}</td><td>${user.score}</td>`;
@@ -58,13 +49,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Fonction pour mettre à jour les informations d'un match
+    // Fonction pour mettre à jour un match dans le tableau
     function updateMatch(match) {
         const matchesTable = document.querySelector('table tbody');
         if (matchesTable) {
             const row = document.getElementById(`match-${match.match_id}`);
             if (row) {
-                // Si la ligne du match existe, mettre à jour son contenu
                 row.innerHTML = `
                     <td>
                         <img src="${match.team1_flag}" alt="${match.team1_name} flag" width="20">
@@ -77,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     <td><button class="delete-match-btn" data-match-id="${match.match_id}">Supprimer</button></td>
                 `;
             } else {
-                // Si la ligne du match n'existe pas, créer une nouvelle ligne
                 const newRow = document.createElement('tr');
                 newRow.id = `match-${match.match_id}`;
                 newRow.innerHTML = `
@@ -93,19 +82,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 matchesTable.appendChild(newRow);
             }
-            // Ré-attacher les écouteurs d'événements aux nouveaux boutons de suppression
+            // Réattacher les écouteurs d'événements aux nouveaux boutons de suppression
             attachDeleteListeners();
         }
     }
 
-    // Sélectionner le formulaire pour mettre à jour le résultat d'un match
+    // Sélection du formulaire de mise à jour du résultat du match
     const matchForm = document.querySelector('form[action="index.php?route=update-match-result"]');
     if (matchForm) {
-        // Ajouter un écouteur d'événement pour la soumission du formulaire
         matchForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Empêcher le rechargement de la page
-            const formData = new FormData(matchForm); // Créer un FormData à partir du formulaire
-            // Envoyer une requête fetch pour mettre à jour le résultat du match
+            event.preventDefault();
+            const formData = new FormData(matchForm);
             fetch('index.php?route=update-match-result', {
                 method: 'POST',
                 body: formData
@@ -113,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Mettre à jour le match et le classement après une mise à jour réussie
+                    // Mettre à jour le match modifié et le classement après mise à jour réussie
                     updateMatch(data.match);
                     updateLeaderboard(data.users);
                 } else {

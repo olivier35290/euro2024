@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 La Team Pronostics
 
 Une application simple et intuitive pour gérer les pronostics de l'EURO 2024, développée avec PHP pour l'API et un front-end en HTML/CSS/JS.
@@ -28,40 +27,6 @@ Pré-requis
 
     Cloner le dépôt :
 
-=======
-# La Team Pronostics
-
-Une application simple et intuitive pour gérer les pronostics de l'EURO 2024, développée avec PHP pour l'API et un front-end en HTML/CSS/JS.
-
-## Fonctionnalités
-
-- Inscription et connexion des utilisateurs
-- Faire des pronostics sur les matchs de l'EURO 2024
-- Voir les résultats des matchs pronostiquer
-- Voir le classement des utilisateurs
-- Panel administrateur pour gérer les matchs et les utilisateurs
-
-## Technologies utilisées
-
-- **Front-end :** HTML, CSS (Flexbox), JavaScript
-- **Back-end :** PHP avec PDO pour la gestion de la base de données
-- **Base de données :** MySQL
-- **Autres :** Composer pour la gestion des dépendances, PHP Dotenv pour la gestion des variables d'environnement
-
-## Installation et Configuration
-
-### Pré-requis
-
-- PHP 8.0.3 ou plus
-- MySQL 5.7 ou plus
-- Composer
-
-### Étapes d'installation
-
-1. Cloner le dépôt :
-
-```bash
->>>>>>> 53651e22b7319d588799360418fad6d732d93269
 git clone https://github.com/votre-repo.git
 cd votre-repo
 
@@ -78,7 +43,6 @@ DB_PASS=
 4.Importer la base de données :
 Utiliser phpMyAdmin ou un autre outil pour importer le fichier SQL dans votre base de données MySQL.
 
-<<<<<<< HEAD
 CREATE TABLE `matches` (
   `match_id` int(11) NOT NULL,
   `team1_id` int(11) NOT NULL,
@@ -116,8 +80,6 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-=======
->>>>>>> 53651e22b7319d588799360418fad6d732d93269
 5. Lancer le serveur de développement PHP :
 php -S localhost:8000
 
@@ -139,7 +101,4 @@ Ce projet est distribué sous la licence MIT.
 ### Contact
 
 Pour plus d'informations ou des questions, vous pouvez contacter Olivier Charlet à olivier.charlet@3wa.io.
-<<<<<<< HEAD
 
-=======
->>>>>>> 53651e22b7319d588799360418fad6d732d93269

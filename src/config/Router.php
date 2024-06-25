@@ -2,24 +2,19 @@
 
 namespace App\Config;
 
-// Importation des différents contrôleurs nécessaires
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\PredictionController;
 use App\Controllers\LeaderboardController;
 use App\Controllers\AdminController;
 
-// Déclaration de la classe Router
 class Router
 {
-    // Méthode pour gérer les requêtes HTTP
     public function handleRequest(array $get, array $post)
     {
-        // Récupérer la route demandée à partir des paramètres GET, par défaut 'home'
         $route = $get['route'] ?? 'home';
         $controller = null;
 
-        // Utiliser un switch pour déterminer quel contrôleur et quelle méthode appeler en fonction de la route
         switch ($route) {
             // Routes pour l'authentification
             case 'login':
@@ -76,13 +71,16 @@ class Router
                 $controller = new AdminController();
                 $controller->deleteMatch();
                 break;
+            case 'add-match': // Nouvelle route pour ajouter un match
+                $controller = new AdminController();
+                $controller->addMatch();
+                break;
 
             // Routes pour les pages légales et d'accueil
             case 'legal':
                 $controller = new HomeController();
                 $controller->legal();
                 break;
-            // Par défaut, route 'home'
             case 'home':
             default:
                 $controller = new HomeController();
@@ -91,4 +89,3 @@ class Router
         }
     }
 }
-?>
